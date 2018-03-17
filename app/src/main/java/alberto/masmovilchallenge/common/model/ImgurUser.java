@@ -1,4 +1,4 @@
-package alberto.masmovilchallenge;
+package alberto.masmovilchallenge.common.model;
 
 public class ImgurUser {
     private int mId;
