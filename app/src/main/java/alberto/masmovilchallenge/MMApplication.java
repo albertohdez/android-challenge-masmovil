@@ -2,9 +2,9 @@ package alberto.masmovilchallenge;
 
 import android.app.Application;
 
-import alberto.masmovilchallenge.di.component.ApplicationComponent;
-import alberto.masmovilchallenge.di.component.DaggerApplicationComponent;
-import alberto.masmovilchallenge.di.module.ApplicationModule;
+import alberto.masmovilchallenge.injection.component.ApplicationComponent;
+import alberto.masmovilchallenge.injection.component.DaggerApplicationComponent;
+import alberto.masmovilchallenge.injection.module.ApplicationModule;
 
 public class MMApplication extends Application {
     private ApplicationComponent mApplicationComponent;

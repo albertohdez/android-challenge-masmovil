@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.LoginActivity">
+        <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".common.view.activity.BaseActivity" />
+        <activity android:name=".ui.gallery.GalleryActivity" />
     </application>
 
 </manifest>

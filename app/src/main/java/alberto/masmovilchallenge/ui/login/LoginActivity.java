@@ -1,4 +1,4 @@
-package alberto.masmovilchallenge.login;
+package alberto.masmovilchallenge.ui.login;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +9,7 @@ import android.webkit.WebViewClient;
 import javax.inject.Inject;
 
 import alberto.masmovilchallenge.R;
-import alberto.masmovilchallenge.common.model.ImgurUser;
+import alberto.masmovilchallenge.common.navigator.Navigator;
 import alberto.masmovilchallenge.common.view.activity.BaseActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +24,9 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
     @Inject
     LoginPresenter loginPresenter;
+
+    @Inject
+    Navigator navigator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +52,14 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     }
 
     @Override
-    public void createImgurUserSuccess(ImgurUser newUser) {
+    public void createImgurUserSuccess() {
         Log.v(TAG, "Create Imgur User OK");
         CookieManager.getInstance().removeAllCookie();
         webView.clearHistory();
         webView.clearCache(true);
         webView.clearFormData();
+
+        navigator.openGalleryActivity();
     }
 
     @Override

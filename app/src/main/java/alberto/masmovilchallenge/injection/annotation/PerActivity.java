@@ -1,4 +1,4 @@
-package alberto.masmovilchallenge.di.annotation;
+package alberto.masmovilchallenge.injection.annotation;
 
 import java.lang.annotation.Retention;
 

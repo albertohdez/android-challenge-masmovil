@@ -1,4 +1,4 @@
-package alberto.masmovilchallenge.di.module;
+package alberto.masmovilchallenge.injection.module;
 
 import android.content.Context;
 

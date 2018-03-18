@@ -1,9 +1,9 @@
-package alberto.masmovilchallenge.di.component;
+package alberto.masmovilchallenge.injection.component;
 
 import javax.inject.Singleton;
 
 import alberto.masmovilchallenge.common.view.activity.BaseActivity;
-import alberto.masmovilchallenge.di.module.ApplicationModule;
+import alberto.masmovilchallenge.injection.module.ApplicationModule;
 import dagger.Component;
 
 @Singleton

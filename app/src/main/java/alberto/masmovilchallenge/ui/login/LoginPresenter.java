@@ -1,4 +1,4 @@
-package alberto.masmovilchallenge.login;
+package alberto.masmovilchallenge.ui.login;
 
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -11,7 +11,7 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
     }
 
     public void createImgurUser(String url) {
-        if (url.contains("/?error=")) {
+        if (url.contains("?error=")) {
             getMvpView().createImgurUserError();
         } else {
             createUserDto(url);
@@ -63,7 +63,8 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(accessToken) &&
                 !TextUtils.isEmpty(refreshToken) && accessTokenExpiration > 0) {
             ImgurUser newUser = new ImgurUser(username, accessToken, refreshToken, accessTokenExpiration);
-            getMvpView().createImgurUserSuccess(newUser);
+            //TODO Save new User in preferences
+            getMvpView().createImgurUserSuccess();
         } else {
             getMvpView().createImgurUserError();
         }

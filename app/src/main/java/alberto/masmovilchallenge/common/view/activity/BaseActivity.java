@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import alberto.masmovilchallenge.MMApplication;
-import alberto.masmovilchallenge.di.component.ActivityComponent;
-import alberto.masmovilchallenge.di.component.ApplicationComponent;
-import alberto.masmovilchallenge.di.component.DaggerActivityComponent;
-import alberto.masmovilchallenge.di.module.ActivityModule;
+import alberto.masmovilchallenge.injection.component.ActivityComponent;
+import alberto.masmovilchallenge.injection.component.ApplicationComponent;
+import alberto.masmovilchallenge.injection.component.DaggerActivityComponent;
+import alberto.masmovilchallenge.injection.module.ActivityModule;
 
 public class BaseActivity extends AppCompatActivity {
     private ActivityComponent mActivityComponent;
