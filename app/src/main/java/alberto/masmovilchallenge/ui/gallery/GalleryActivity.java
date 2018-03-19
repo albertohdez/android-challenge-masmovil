@@ -1,6 +1,8 @@
 package alberto.masmovilchallenge.ui.gallery;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,9 +13,15 @@ import alberto.masmovilchallenge.R;
 import alberto.masmovilchallenge.common.model.response.GalleryResponse;
 import alberto.masmovilchallenge.common.navigator.Navigator;
 import alberto.masmovilchallenge.common.view.activity.BaseActivity;
+import alberto.masmovilchallenge.ui.gallery.adapter.ImageGalleryAdapter;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class GalleryActivity extends BaseActivity implements GalleryMvpView {
+
+    @BindView(R.id.rvImages)
+    RecyclerView rvImages;
+
     @Inject
     GalleryPresenter galleryPresenter;
 
@@ -27,7 +35,7 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView {
         setContentView(R.layout.activity_gallery);
         ButterKnife.bind(this);
         galleryPresenter.attachView(this);
-        galleryPresenter.getGallery("hot", "viral", 1, true);
+        galleryPresenter.getGallery();
     }
 
     @Override
@@ -54,11 +62,20 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView {
 
     @Override
     public void getGallerySuccess(GalleryResponse galleryResponse) {
-
+        createGalleryRecyclerView(galleryResponse);
     }
 
     @Override
     public void getGalleryError() {
+        //TODO
+    }
 
+    private void createGalleryRecyclerView(GalleryResponse galleryResponse) {
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
+        rvImages.setHasFixedSize(true);
+        rvImages.setLayoutManager(layoutManager);
+
+        ImageGalleryAdapter adapter = new ImageGalleryAdapter(galleryResponse);
+        rvImages.setAdapter(adapter);
     }
 }
