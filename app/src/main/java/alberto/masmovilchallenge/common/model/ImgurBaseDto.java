@@ -3,44 +3,46 @@ package alberto.masmovilchallenge.common.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class ImgurBaseDto implements Parcelable {
 
-    @JsonProperty("id")
+    @SerializedName("id")
     private String id;
 
-    @JsonProperty("title")
+    @SerializedName("title")
     private String title;
 
-    @JsonProperty("description")
+    @SerializedName("description")
     private String description;
 
-    @JsonProperty("account_url")
+    @SerializedName("account_url")
     private String account;
 
-    @JsonProperty("link")
+    @SerializedName("link")
     private String link;
 
-
-    @JsonProperty("vote")
+    @SerializedName("vote")
     private String vote;
 
-    @JsonProperty("deletehash")
+    @SerializedName("deletehash")
     private String deleteHash;
 
-    @JsonProperty("topic")
+    @SerializedName("topic")
     private String topic;
 
-    @JsonProperty("datetime")
+    @SerializedName("datetime")
     private long date;
 
-    @JsonProperty("favorite")
+    @SerializedName("favorite")
     private boolean isFavorited;
+
+    public ImgurBaseDto(String id, String title, String link) {
+        this.id = id;
+        this.title = title;
+        this.link = link;
+    }
 
     public String getId() {
         return id;

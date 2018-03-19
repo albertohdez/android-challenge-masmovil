@@ -11,7 +11,7 @@ public class AppServiceImpl implements AppService {
     }
 
     @Override
-    public Observable<GalleryResponse> getGallery(String section, String sort, int page, boolean showViral) {
-        return apiClient.getService().getGallery(section, sort, page, showViral);
+    public Observable<GalleryResponse> getProfileAlbums(String user, int page) {
+        return apiClient.getService().getProfileAlbums(user, page);
     }
 }

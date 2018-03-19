@@ -40,8 +40,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    GalleryPresenter provideGalleryPresenter(AppService appService) {
-        return new GalleryPresenter(appService);
+    GalleryPresenter provideGalleryPresenter(AppService appService, DataStore dataStore) {
+        return new GalleryPresenter(appService, dataStore);
     }
 
     @Provides
