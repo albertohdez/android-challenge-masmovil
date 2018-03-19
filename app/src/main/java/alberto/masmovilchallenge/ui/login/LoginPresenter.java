@@ -5,9 +5,14 @@ import android.text.format.DateUtils;
 
 import alberto.masmovilchallenge.common.model.ImgurUser;
 import alberto.masmovilchallenge.common.view.presenter.BasePresenter;
+import alberto.masmovilchallenge.data.prefs.DataStore;
 
 public class LoginPresenter extends BasePresenter<LoginMvpView> {
-    public LoginPresenter() {
+
+    private final DataStore dataStore;
+
+    public LoginPresenter(DataStore dataStore) {
+        this.dataStore = dataStore;
     }
 
     public void createImgurUser(String url) {
@@ -63,7 +68,7 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(accessToken) &&
                 !TextUtils.isEmpty(refreshToken) && accessTokenExpiration > 0) {
             ImgurUser newUser = new ImgurUser(username, accessToken, refreshToken, accessTokenExpiration);
-            //TODO Save new User in preferences
+            dataStore.saveImgurUser(newUser);
             getMvpView().createImgurUserSuccess();
         } else {
             getMvpView().createImgurUserError();

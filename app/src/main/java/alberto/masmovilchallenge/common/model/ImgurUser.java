@@ -1,57 +1,97 @@
 package alberto.masmovilchallenge.common.model;
 
-public class ImgurUser {
-    private int mId;
-    private String mUsername;
-    private String mAccessToken;
-    private String mRefreshToken;
-    private long mAccessTokenExpiration;
+import android.os.Parcel;
+import android.os.Parcelable;
 
+public class ImgurUser implements Parcelable {
+    private int id;
+    private String username;
+    private String accessToken;
+    private String refreshToken;
+    private long accessTokenExpiration;
+
+    public ImgurUser() {
+    }
 
     public ImgurUser(String username, String accessToken, String refreshToken, long accessTokenExpiration) {
-        mUsername = username;
-        mAccessToken = accessToken;
-        mRefreshToken = refreshToken;
-        mAccessTokenExpiration = accessTokenExpiration;
+        this.username = username;
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
+        this.accessTokenExpiration = accessTokenExpiration;
     }
 
-    public int getmId() {
-        return mId;
+    public int getId() {
+        return id;
     }
 
-    public void setmId(int mId) {
-        this.mId = mId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getmUsername() {
-        return mUsername;
+    public String getUsername() {
+        return username;
     }
 
-    public void setmUsername(String mUsername) {
-        this.mUsername = mUsername;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getmAccessToken() {
-        return mAccessToken;
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public void setmAccessToken(String mAccessToken) {
-        this.mAccessToken = mAccessToken;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
-    public String getmRefreshToken() {
-        return mRefreshToken;
+    public String getRefreshToken() {
+        return refreshToken;
     }
 
-    public void setmRefreshToken(String mRefreshToken) {
-        this.mRefreshToken = mRefreshToken;
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
-    public long getmAccessTokenExpiration() {
-        return mAccessTokenExpiration;
+    public long getAccessTokenExpiration() {
+        return accessTokenExpiration;
     }
 
-    public void setmAccessTokenExpiration(long mAccessTokenExpiration) {
-        this.mAccessTokenExpiration = mAccessTokenExpiration;
+    public void setAccessTokenExpiration(long accessTokenExpiration) {
+        this.accessTokenExpiration = accessTokenExpiration;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.username);
+        dest.writeString(this.accessToken);
+        dest.writeString(this.refreshToken);
+        dest.writeLong(this.accessTokenExpiration);
+    }
+
+    protected ImgurUser(Parcel in) {
+        this.id = in.readInt();
+        this.username = in.readString();
+        this.accessToken = in.readString();
+        this.refreshToken = in.readString();
+        this.accessTokenExpiration = in.readLong();
+    }
+
+    public static final Parcelable.Creator<ImgurUser> CREATOR = new Parcelable.Creator<ImgurUser>() {
+        @Override
+        public ImgurUser createFromParcel(Parcel source) {
+            return new ImgurUser(source);
+        }
+
+        @Override
+        public ImgurUser[] newArray(int size) {
+            return new ImgurUser[size];
+        }
+    };
 }

@@ -5,6 +5,8 @@ import android.content.Context;
 import javax.inject.Singleton;
 
 import alberto.masmovilchallenge.MMApplication;
+import alberto.masmovilchallenge.data.prefs.DataStore;
+import alberto.masmovilchallenge.data.prefs.DataStoreManager;
 import dagger.Module;
 import dagger.Provides;
 
@@ -22,4 +24,10 @@ public class ApplicationModule {
         return mApplication;
     }
 
+
+    @Provides
+    @Singleton
+    DataStore provideDataStore(Context context) {
+        return DataStoreManager.getAppDataStore(context);
+    }
 }

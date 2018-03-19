@@ -3,6 +3,7 @@ package alberto.masmovilchallenge.injection.module;
 import android.app.Activity;
 
 import alberto.masmovilchallenge.common.navigator.Navigator;
+import alberto.masmovilchallenge.data.prefs.DataStore;
 import alberto.masmovilchallenge.injection.annotation.PerActivity;
 import alberto.masmovilchallenge.ui.camera.CameraPresenter;
 import alberto.masmovilchallenge.ui.gallery.GalleryPresenter;
@@ -32,8 +33,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    LoginPresenter provideLoginPresenter() {
-        return new LoginPresenter();
+    LoginPresenter provideLoginPresenter(DataStore dataStore) {
+        return new LoginPresenter(dataStore);
     }
 
     @Provides
