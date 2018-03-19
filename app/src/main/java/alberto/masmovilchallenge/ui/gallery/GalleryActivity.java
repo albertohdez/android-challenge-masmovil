@@ -1,7 +1,5 @@
 package alberto.masmovilchallenge.ui.gallery;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,11 +8,10 @@ import android.view.MenuItem;
 import javax.inject.Inject;
 
 import alberto.masmovilchallenge.R;
+import alberto.masmovilchallenge.common.model.response.GalleryResponse;
 import alberto.masmovilchallenge.common.navigator.Navigator;
 import alberto.masmovilchallenge.common.view.activity.BaseActivity;
 import butterknife.ButterKnife;
-
-import static alberto.masmovilchallenge.common.constants.Constants.REQUEST_IMAGE_CAPTURE;
 
 public class GalleryActivity extends BaseActivity implements GalleryMvpView {
     @Inject
@@ -30,6 +27,7 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView {
         setContentView(R.layout.activity_gallery);
         ButterKnife.bind(this);
         galleryPresenter.attachView(this);
+        galleryPresenter.getGallery("hot", "viral", 1, true);
     }
 
     @Override
@@ -52,5 +50,15 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView {
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void getGallerySuccess(GalleryResponse galleryResponse) {
+
+    }
+
+    @Override
+    public void getGalleryError() {
+
     }
 }

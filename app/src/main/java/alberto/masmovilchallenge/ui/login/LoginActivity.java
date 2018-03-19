@@ -36,10 +36,11 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
         ButterKnife.bind(this);
         loginPresenter.attachView(this);
 
-        configWebView();
+        loginPresenter.isUserLogged();
     }
 
-    private void configWebView() {
+    @Override
+    public void configWebView() {
         webView.loadUrl(LOGIN_URL);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
@@ -52,6 +53,11 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
     }
 
     @Override
+    public void goToGalleryActivity() {
+        navigator.openGalleryActivity();
+    }
+
+    @Override
     public void createImgurUserSuccess() {
         Log.v(TAG, "Create Imgur User OK");
         CookieManager.getInstance().removeAllCookie();
@@ -59,7 +65,7 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
         webView.clearCache(true);
         webView.clearFormData();
 
-        navigator.openGalleryActivity();
+        goToGalleryActivity();
     }
 
     @Override

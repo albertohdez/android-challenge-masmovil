@@ -7,6 +7,10 @@ import javax.inject.Singleton;
 import alberto.masmovilchallenge.MMApplication;
 import alberto.masmovilchallenge.data.prefs.DataStore;
 import alberto.masmovilchallenge.data.prefs.DataStoreManager;
+import alberto.masmovilchallenge.data.service.ApiClient;
+import alberto.masmovilchallenge.data.service.AppService;
+import alberto.masmovilchallenge.data.service.AppServiceImpl;
+import alberto.masmovilchallenge.injection.annotation.PerActivity;
 import dagger.Module;
 import dagger.Provides;
 
@@ -29,5 +33,17 @@ public class ApplicationModule {
     @Singleton
     DataStore provideDataStore(Context context) {
         return DataStoreManager.getAppDataStore(context);
+    }
+
+    @Provides
+    @Singleton
+    ApiClient provideApiClient(DataStore dataStore) {
+        return new ApiClient(dataStore);
+    }
+
+    @Provides
+    @Singleton
+    AppService provideAppService(ApiClient apiClient) {
+        return new AppServiceImpl(apiClient);
     }
 }

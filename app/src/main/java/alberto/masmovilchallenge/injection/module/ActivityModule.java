@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import alberto.masmovilchallenge.common.navigator.Navigator;
 import alberto.masmovilchallenge.data.prefs.DataStore;
+import alberto.masmovilchallenge.data.service.AppService;
 import alberto.masmovilchallenge.injection.annotation.PerActivity;
 import alberto.masmovilchallenge.ui.camera.CameraPresenter;
 import alberto.masmovilchallenge.ui.gallery.GalleryPresenter;
@@ -39,8 +40,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    GalleryPresenter provideGalleryPresenter() {
-        return new GalleryPresenter();
+    GalleryPresenter provideGalleryPresenter(AppService appService) {
+        return new GalleryPresenter(appService);
     }
 
     @Provides

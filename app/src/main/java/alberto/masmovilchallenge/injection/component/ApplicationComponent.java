@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import alberto.masmovilchallenge.common.view.activity.BaseActivity;
 import alberto.masmovilchallenge.data.prefs.DataStore;
+import alberto.masmovilchallenge.data.service.AppService;
 import alberto.masmovilchallenge.injection.module.ApplicationModule;
 import dagger.Component;
 
@@ -13,4 +14,6 @@ public interface ApplicationComponent {
     void inject(BaseActivity baseActivity);
 
     DataStore dataStore();
+
+    AppService appService();
 }

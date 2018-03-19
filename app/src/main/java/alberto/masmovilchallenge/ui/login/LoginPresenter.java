@@ -15,6 +15,14 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
         this.dataStore = dataStore;
     }
 
+    public void isUserLogged() {
+        if (dataStore.loadImgurUser() != null && dataStore.loadImgurUser().getAccessToken() != null) {
+            getMvpView().goToGalleryActivity();
+        } else {
+            getMvpView().configWebView();
+        }
+    }
+
     public void createImgurUser(String url) {
         if (url.contains("?error=")) {
             getMvpView().createImgurUserError();
