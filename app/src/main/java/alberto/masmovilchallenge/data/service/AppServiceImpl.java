@@ -1,6 +1,6 @@
 package alberto.masmovilchallenge.data.service;
 
-import alberto.masmovilchallenge.common.model.response.GalleryResponse;
+import alberto.masmovilchallenge.common.model.response.AlbumResponse;
 import rx.Observable;
 
 public class AppServiceImpl implements AppService {
@@ -11,7 +11,7 @@ public class AppServiceImpl implements AppService {
     }
 
     @Override
-    public Observable<GalleryResponse> getProfileAlbums(String user, int page) {
-        return apiClient.getService().getProfileAlbums(user, page);
+    public Observable<AlbumResponse> getAllImages(String userName) {
+        return apiClient.getService().getAllImages(userName);
     }
 }

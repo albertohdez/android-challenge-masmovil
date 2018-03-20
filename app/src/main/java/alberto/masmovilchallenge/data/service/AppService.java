@@ -1,9 +1,9 @@
 package alberto.masmovilchallenge.data.service;
 
 
-import alberto.masmovilchallenge.common.model.response.GalleryResponse;
+import alberto.masmovilchallenge.common.model.response.AlbumResponse;
 import rx.Observable;
 
 public interface AppService {
-    Observable<GalleryResponse> getProfileAlbums(String user, int page);
+    Observable <AlbumResponse> getAllImages(String userName);
 }

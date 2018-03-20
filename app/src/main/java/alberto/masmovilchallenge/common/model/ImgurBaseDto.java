@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-
 public class ImgurBaseDto implements Parcelable {
 
     @SerializedName("id")
@@ -23,20 +22,12 @@ public class ImgurBaseDto implements Parcelable {
     @SerializedName("link")
     private String link;
 
-    @SerializedName("vote")
-    private String vote;
-
     @SerializedName("deletehash")
     private String deleteHash;
-
-    @SerializedName("topic")
-    private String topic;
 
     @SerializedName("datetime")
     private long date;
 
-    @SerializedName("favorite")
-    private boolean isFavorited;
 
     public ImgurBaseDto(String id, String title, String link) {
         this.id = id;
@@ -84,28 +75,12 @@ public class ImgurBaseDto implements Parcelable {
         this.link = link;
     }
 
-    public String getVote() {
-        return vote;
-    }
-
-    public void setVote(String vote) {
-        this.vote = vote;
-    }
-
     public String getDeleteHash() {
         return deleteHash;
     }
 
     public void setDeleteHash(String deleteHash) {
         this.deleteHash = deleteHash;
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
     }
 
     public long getDate() {
@@ -115,15 +90,6 @@ public class ImgurBaseDto implements Parcelable {
     public void setDate(long date) {
         this.date = date;
     }
-
-    public boolean isFavorited() {
-        return isFavorited;
-    }
-
-    public void setFavorited(boolean favorited) {
-        isFavorited = favorited;
-    }
-
 
     @Override
     public int describeContents() {
@@ -137,11 +103,8 @@ public class ImgurBaseDto implements Parcelable {
         dest.writeString(this.description);
         dest.writeString(this.account);
         dest.writeString(this.link);
-        dest.writeString(this.vote);
         dest.writeString(this.deleteHash);
-        dest.writeString(this.topic);
         dest.writeLong(this.date);
-        dest.writeByte(this.isFavorited ? (byte) 1 : (byte) 0);
     }
 
     public ImgurBaseDto() {
@@ -153,11 +116,8 @@ public class ImgurBaseDto implements Parcelable {
         this.description = in.readString();
         this.account = in.readString();
         this.link = in.readString();
-        this.vote = in.readString();
         this.deleteHash = in.readString();
-        this.topic = in.readString();
         this.date = in.readLong();
-        this.isFavorited = in.readByte() != 0;
     }
 
     public static final Creator<ImgurBaseDto> CREATOR = new Creator<ImgurBaseDto>() {

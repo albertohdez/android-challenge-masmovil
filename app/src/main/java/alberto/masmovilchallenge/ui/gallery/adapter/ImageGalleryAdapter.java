@@ -11,15 +11,15 @@ import com.bumptech.glide.Glide;
 
 import alberto.masmovilchallenge.R;
 import alberto.masmovilchallenge.common.model.ImgurBaseDto;
-import alberto.masmovilchallenge.common.model.response.GalleryResponse;
+import alberto.masmovilchallenge.common.model.response.AlbumResponse;
 
 public class ImageGalleryAdapter extends RecyclerView.Adapter<ImageGalleryAdapter.MyViewHolder> {
 
-    private GalleryResponse galleryImages;
+    private AlbumResponse galleryImages;
     private Context context;
 
-    public ImageGalleryAdapter(GalleryResponse galleryImages) {
-        this.galleryImages = galleryImages;
+    public ImageGalleryAdapter(AlbumResponse albumResponse) {
+        this.galleryImages = albumResponse;
     }
 
     @Override

@@ -1,13 +1,12 @@
 package alberto.masmovilchallenge.ui.gallery;
 
-import alberto.masmovilchallenge.common.model.response.GalleryResponse;
+import alberto.masmovilchallenge.common.model.response.AlbumResponse;
 import alberto.masmovilchallenge.common.view.presenter.BasePresenter;
 import alberto.masmovilchallenge.data.prefs.DataStore;
 import alberto.masmovilchallenge.data.service.AppService;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
 
 public class GalleryPresenter extends BasePresenter<GalleryMvpView> {
 
@@ -20,11 +19,10 @@ public class GalleryPresenter extends BasePresenter<GalleryMvpView> {
     }
 
     public void getGallery() {
-
-        addRxSubscription(appService.getProfileAlbums(dataStore.loadImgurUser().getUsername(), 0)
+        addRxSubscription(appService.getAllImages(dataStore.loadImgurUser().getUsername())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GalleryResponse>() {
+                .subscribe(new Subscriber<AlbumResponse>() {
                     @Override
                     public void onCompleted() {
 
@@ -36,10 +34,11 @@ public class GalleryPresenter extends BasePresenter<GalleryMvpView> {
                     }
 
                     @Override
-                    public void onNext(GalleryResponse galleryResponse) {
-                        getMvpView().getGallerySuccess(galleryResponse);
+                    public void onNext(AlbumResponse albumResponse) {
+                        getMvpView().getGallerySuccess(albumResponse);
                     }
                 })
         );
     }
+
 }

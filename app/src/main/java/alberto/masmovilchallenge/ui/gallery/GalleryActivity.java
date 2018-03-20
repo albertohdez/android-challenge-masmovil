@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import javax.inject.Inject;
 
 import alberto.masmovilchallenge.R;
-import alberto.masmovilchallenge.common.model.response.GalleryResponse;
+import alberto.masmovilchallenge.common.model.response.AlbumResponse;
 import alberto.masmovilchallenge.common.navigator.Navigator;
 import alberto.masmovilchallenge.common.view.activity.BaseActivity;
 import alberto.masmovilchallenge.ui.gallery.adapter.ImageGalleryAdapter;
@@ -61,8 +61,8 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView {
     }
 
     @Override
-    public void getGallerySuccess(GalleryResponse galleryResponse) {
-        createGalleryRecyclerView(galleryResponse);
+    public void getGallerySuccess(AlbumResponse albumResponse) {
+        createGalleryRecyclerView(albumResponse);
     }
 
     @Override
@@ -70,12 +70,12 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView {
         //TODO
     }
 
-    private void createGalleryRecyclerView(GalleryResponse galleryResponse) {
+    private void createGalleryRecyclerView(AlbumResponse albumResponse) {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         rvImages.setHasFixedSize(true);
         rvImages.setLayoutManager(layoutManager);
 
-        ImageGalleryAdapter adapter = new ImageGalleryAdapter(galleryResponse);
+        ImageGalleryAdapter adapter = new ImageGalleryAdapter(albumResponse);
         rvImages.setAdapter(adapter);
     }
 }
