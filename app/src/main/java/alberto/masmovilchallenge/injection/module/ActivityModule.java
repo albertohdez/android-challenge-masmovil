@@ -46,7 +46,7 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    CameraPresenter provideCameraPresenter() {
-        return new CameraPresenter();
+    CameraPresenter provideCameraPresenter(AppService appService) {
+        return new CameraPresenter(appService);
     }
 }

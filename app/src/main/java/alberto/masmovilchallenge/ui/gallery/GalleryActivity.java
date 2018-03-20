@@ -35,7 +35,6 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView {
         setContentView(R.layout.activity_gallery);
         ButterKnife.bind(this);
         galleryPresenter.attachView(this);
-        galleryPresenter.getGallery();
     }
 
     @Override
@@ -58,6 +57,12 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView {
                 break;
         }
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        galleryPresenter.getGallery();
     }
 
     @Override

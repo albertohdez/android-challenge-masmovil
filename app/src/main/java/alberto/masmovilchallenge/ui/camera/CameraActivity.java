@@ -26,6 +26,8 @@ public class CameraActivity extends BaseActivity implements CameraMvpView {
     @BindView(R.id.ivPicture)
     ImageView ivPicture;
 
+    private Bitmap imageBitmap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,15 +42,25 @@ public class CameraActivity extends BaseActivity implements CameraMvpView {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             if (extras != null) {
-                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                imageBitmap = (Bitmap) extras.get("data");
                 ivPicture.setImageBitmap(imageBitmap);
             }
         }
     }
 
+    @Override
+    public void uploadImageError() {
+        //TODO
+    }
+
+    @Override
+    public void uploadImagesSuccess() {
+        finish();
+    }
+
     @OnClick(R.id.btnUpload)
     public void onUploadClicked() {
-        //TODO
+        cameraPresenter.uploadImage(imageBitmap);
     }
 
     @OnClick(R.id.btnRetake)
