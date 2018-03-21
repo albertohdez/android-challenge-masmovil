@@ -13,6 +13,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static alberto.masmovilchallenge.common.constants.Constants.TYPE_JPEG;
+
 public class CameraPresenter extends BasePresenter<CameraMvpView> {
 
     private final AppService appService;
@@ -22,13 +24,12 @@ public class CameraPresenter extends BasePresenter<CameraMvpView> {
     }
 
     public void uploadImage(Bitmap imageBitmap) {
-        String type = "image/jpeg";
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] byteArray = stream.toByteArray();
 
-        RequestBody uploadFile = RequestBody.create(MediaType.parse(type), byteArray);
+        RequestBody uploadFile = RequestBody.create(MediaType.parse(TYPE_JPEG), byteArray);
 
         addRxSubscription(appService.uploadImage(uploadFile)
                 .subscribeOn(Schedulers.io())

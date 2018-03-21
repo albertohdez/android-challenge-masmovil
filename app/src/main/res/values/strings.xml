@@ -4,4 +4,10 @@
     <string name="camera_upload_picture">Subir imagen</string>
     <string name="camera_retake_picture">Volver a tomar</string>
     <string name="loading">Cargando...</string>
+    <string name="dialog_title_error">Error</string>
+    <string name="dialog_message_error">Ha ocurrido un problema, inténtalo de nuevo</string>
+    <string name="ok">OK</string>
+    <string name="confirm_delete">¿Está seguro que deseas eliminar la imagen seleccionada?</string>
+    <string name="cancel">Cancelar</string>
+    <string name="dialog_title_alert">!Alerta¡</string>
 </resources>

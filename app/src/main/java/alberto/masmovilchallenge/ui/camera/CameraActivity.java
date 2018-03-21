@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import alberto.masmovilchallenge.R;
 import alberto.masmovilchallenge.common.navigator.Navigator;
 import alberto.masmovilchallenge.common.view.activity.BaseActivity;
+import alberto.masmovilchallenge.common.view.dialog.DialogManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -22,6 +23,9 @@ public class CameraActivity extends BaseActivity implements CameraMvpView {
 
     @Inject
     Navigator navigator;
+
+    @Inject
+    DialogManager dialogManager;
 
     @BindView(R.id.ivPicture)
     ImageView ivPicture;
@@ -39,11 +43,17 @@ public class CameraActivity extends BaseActivity implements CameraMvpView {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            if (extras != null) {
-                imageBitmap = (Bitmap) extras.get("data");
-                ivPicture.setImageBitmap(imageBitmap);
+        if (requestCode == REQUEST_IMAGE_CAPTURE) {
+            if (resultCode == RESULT_OK) {
+                Bundle extras = data.getExtras();
+                if (extras != null) {
+                    imageBitmap = (Bitmap) extras.get("data");
+                    ivPicture.setImageBitmap(imageBitmap);
+                } else {
+                    finish();
+                }
+            } else {
+                finish();
             }
         }
     }
@@ -51,7 +61,7 @@ public class CameraActivity extends BaseActivity implements CameraMvpView {
     @Override
     public void uploadImageError() {
         dismissProgressDialog();
-        //TODO
+        dialogManager.showErrorDialog();
     }
 
     @Override

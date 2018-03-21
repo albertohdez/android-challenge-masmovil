@@ -8,4 +8,6 @@ public class Constants {
     public static final int REQUEST_IMAGE_CAPTURE = 1001;
 
     public static final String IMGUR_USER_KEY = "imgur_user_key";
+
+    public static final String TYPE_JPEG = "image/jpeg";
 }

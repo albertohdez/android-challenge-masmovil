@@ -1,5 +1,6 @@
 package alberto.masmovilchallenge.ui.gallery;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import alberto.masmovilchallenge.R;
 import alberto.masmovilchallenge.common.model.response.AlbumResponse;
 import alberto.masmovilchallenge.common.navigator.Navigator;
 import alberto.masmovilchallenge.common.view.activity.BaseActivity;
+import alberto.masmovilchallenge.common.view.dialog.DialogManager;
 import alberto.masmovilchallenge.ui.gallery.adapter.ImageGalleryAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +29,9 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView, Ima
 
     @Inject
     Navigator navigator;
+
+    @Inject
+    DialogManager dialogManager;
 
     private ImageGalleryAdapter adapter;
 
@@ -75,7 +80,7 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView, Ima
 
     @Override
     public void getGalleryError() {
-        //TODO
+        dialogManager.showErrorDialog();
     }
 
     @Override
@@ -87,14 +92,18 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView, Ima
     @Override
     public void deleteImageError() {
         dismissProgressDialog();
-        //TODO
+        dialogManager.showErrorDialog();
     }
 
     @Override
-    public void onRemoveItemClick(String deleteHash) {
-        //TODO confirm dialog
-        showProgressDialog();
-        galleryPresenter.deleteImage(deleteHash);
+    public void onRemoveItemClick(final String deleteHash) {
+        dialogManager.showCustomDialog(getString(R.string.confirm_delete), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                showProgressDialog();
+                galleryPresenter.deleteImage(deleteHash);
+            }
+        });
     }
 
     private void createGalleryRecyclerView(AlbumResponse albumResponse) {

@@ -3,6 +3,7 @@ package alberto.masmovilchallenge.injection.module;
 import android.app.Activity;
 
 import alberto.masmovilchallenge.common.navigator.Navigator;
+import alberto.masmovilchallenge.common.view.dialog.DialogManager;
 import alberto.masmovilchallenge.data.prefs.DataStore;
 import alberto.masmovilchallenge.data.service.AppService;
 import alberto.masmovilchallenge.injection.annotation.PerActivity;
@@ -30,6 +31,12 @@ public class ActivityModule {
     @PerActivity
     Navigator provideNavigator() {
         return new Navigator(mActivity);
+    }
+
+    @Provides
+    @PerActivity
+    DialogManager provideDialogManager() {
+        return new DialogManager(mActivity);
     }
 
     @Provides

@@ -21,7 +21,6 @@ public class ImageGalleryAdapter extends RecyclerView.Adapter<ImageGalleryAdapte
     private AlbumResponse galleryImages;
     private Context context;
     private boolean deleteFlow = false;
-
     private OnRemoveClickListener onRemoveClickListener;
 
     public interface OnRemoveClickListener {
