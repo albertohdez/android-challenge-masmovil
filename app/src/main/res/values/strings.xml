@@ -3,4 +3,5 @@
     <string name="camera_picture_taken">Has sacado la siguiente fotografía. ¿Deseas subirla a tu Imgur?</string>
     <string name="camera_upload_picture">Subir imagen</string>
     <string name="camera_retake_picture">Volver a tomar</string>
+    <string name="loading">Cargando...</string>
 </resources>

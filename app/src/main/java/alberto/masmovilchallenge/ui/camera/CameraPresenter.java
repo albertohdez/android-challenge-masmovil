@@ -22,7 +22,6 @@ public class CameraPresenter extends BasePresenter<CameraMvpView> {
     }
 
     public void uploadImage(Bitmap imageBitmap) {
-        //TODO Implement Loading
         String type = "image/jpeg";
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

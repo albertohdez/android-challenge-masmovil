@@ -12,11 +12,21 @@ import com.bumptech.glide.Glide;
 import alberto.masmovilchallenge.R;
 import alberto.masmovilchallenge.common.model.ImgurBaseDto;
 import alberto.masmovilchallenge.common.model.response.AlbumResponse;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ImageGalleryAdapter extends RecyclerView.Adapter<ImageGalleryAdapter.MyViewHolder> {
 
     private AlbumResponse galleryImages;
     private Context context;
+    private boolean deleteFlow = false;
+
+    private OnRemoveClickListener onRemoveClickListener;
+
+    public interface OnRemoveClickListener {
+        void onRemoveItemClick(String deleteHash);
+    }
 
     public ImageGalleryAdapter(AlbumResponse albumResponse) {
         this.galleryImages = albumResponse;
@@ -39,6 +49,10 @@ public class ImageGalleryAdapter extends RecyclerView.Adapter<ImageGalleryAdapte
                 .load(image.getLink())
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(imageView);
+
+
+        ImageView removeImageView = holder.removeImageView;
+        removeImageView.setVisibility(deleteFlow ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -46,23 +60,32 @@ public class ImageGalleryAdapter extends RecyclerView.Adapter<ImageGalleryAdapte
         return (galleryImages.getData().size());
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public void updateRemoveFlow() {
+        deleteFlow = !deleteFlow;
+    }
 
-        public ImageView imageView;
+    public void setOnRemoveClickListener(OnRemoveClickListener onRemoveClickListener) {
+        this.onRemoveClickListener = onRemoveClickListener;
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.ivImage)
+        ImageView imageView;
+
+        @BindView(R.id.ivRemoveImage)
+        ImageView removeImageView;
 
         public MyViewHolder(View itemView) {
-
             super(itemView);
-            imageView = itemView.findViewById(R.id.ivImage);
-            itemView.setOnClickListener(this);
+            ButterKnife.bind(this, itemView);
         }
 
-        @Override
-        public void onClick(View view) {
+        @OnClick(R.id.ivRemoveImage)
+        public void onClick() {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 ImgurBaseDto image = galleryImages.getData().get(position);
-                //TODO
+                onRemoveClickListener.onRemoveItemClick(image.getDeleteHash());
             }
         }
     }

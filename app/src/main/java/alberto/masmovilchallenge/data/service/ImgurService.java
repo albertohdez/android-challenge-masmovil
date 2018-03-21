@@ -1,8 +1,10 @@
 package alberto.masmovilchallenge.data.service;
 
 import alberto.masmovilchallenge.common.model.response.AlbumResponse;
+import alberto.masmovilchallenge.common.model.response.BasicResponse;
 import alberto.masmovilchallenge.common.model.response.PhotoResponse;
 import okhttp3.RequestBody;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -19,4 +21,6 @@ public interface ImgurService {
     @POST("/3/upload")
     Observable<PhotoResponse> uploadPhoto(@Part("image") RequestBody file);
 
+    @DELETE("/3/image/{deleteHash}")
+    Observable<BasicResponse> deletePhoto(@Path("deleteHash") String deleteHash);
 }

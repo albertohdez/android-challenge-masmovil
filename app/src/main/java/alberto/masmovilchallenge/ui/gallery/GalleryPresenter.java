@@ -1,6 +1,7 @@
 package alberto.masmovilchallenge.ui.gallery;
 
 import alberto.masmovilchallenge.common.model.response.AlbumResponse;
+import alberto.masmovilchallenge.common.model.response.BasicResponse;
 import alberto.masmovilchallenge.common.view.presenter.BasePresenter;
 import alberto.masmovilchallenge.data.prefs.DataStore;
 import alberto.masmovilchallenge.data.service.AppService;
@@ -41,4 +42,26 @@ public class GalleryPresenter extends BasePresenter<GalleryMvpView> {
         );
     }
 
+    public void deleteImage(String deleteHash) {
+        addRxSubscription(appService.deleteImage(deleteHash)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BasicResponse>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        getMvpView().deleteImageError();
+                    }
+
+                    @Override
+                    public void onNext(BasicResponse basicResponse) {
+                        getMvpView().deleteImageSuccess();
+                    }
+                })
+        );
+    }
 }

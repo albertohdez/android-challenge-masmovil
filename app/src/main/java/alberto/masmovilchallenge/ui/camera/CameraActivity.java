@@ -50,16 +50,19 @@ public class CameraActivity extends BaseActivity implements CameraMvpView {
 
     @Override
     public void uploadImageError() {
+        dismissProgressDialog();
         //TODO
     }
 
     @Override
     public void uploadImagesSuccess() {
+        dismissProgressDialog();
         finish();
     }
 
     @OnClick(R.id.btnUpload)
     public void onUploadClicked() {
+        showProgressDialog();
         cameraPresenter.uploadImage(imageBitmap);
     }
 

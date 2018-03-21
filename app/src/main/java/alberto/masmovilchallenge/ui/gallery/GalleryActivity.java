@@ -17,7 +17,7 @@ import alberto.masmovilchallenge.ui.gallery.adapter.ImageGalleryAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GalleryActivity extends BaseActivity implements GalleryMvpView {
+public class GalleryActivity extends BaseActivity implements GalleryMvpView, ImageGalleryAdapter.OnRemoveClickListener {
 
     @BindView(R.id.rvImages)
     RecyclerView rvImages;
@@ -27,6 +27,8 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView {
 
     @Inject
     Navigator navigator;
+
+    private ImageGalleryAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,8 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView {
                 navigator.openCameraActivity();
                 break;
             case R.id.action_delete:
-                //TODO
+                adapter.updateRemoveFlow();
+                adapter.notifyDataSetChanged();
                 break;
             default:
                 break;
@@ -75,12 +78,32 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView {
         //TODO
     }
 
+    @Override
+    public void deleteImageSuccess() {
+        dismissProgressDialog();
+        galleryPresenter.getGallery();
+    }
+
+    @Override
+    public void deleteImageError() {
+        dismissProgressDialog();
+        //TODO
+    }
+
+    @Override
+    public void onRemoveItemClick(String deleteHash) {
+        //TODO confirm dialog
+        showProgressDialog();
+        galleryPresenter.deleteImage(deleteHash);
+    }
+
     private void createGalleryRecyclerView(AlbumResponse albumResponse) {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         rvImages.setHasFixedSize(true);
         rvImages.setLayoutManager(layoutManager);
 
-        ImageGalleryAdapter adapter = new ImageGalleryAdapter(albumResponse);
+        adapter = new ImageGalleryAdapter(albumResponse);
+        adapter.setOnRemoveClickListener(this);
         rvImages.setAdapter(adapter);
     }
 }

@@ -7,4 +7,8 @@ public interface GalleryMvpView extends MvpView {
     void getGallerySuccess(AlbumResponse albumResponse);
 
     void getGalleryError();
+
+    void deleteImageSuccess();
+
+    void deleteImageError();
 }
