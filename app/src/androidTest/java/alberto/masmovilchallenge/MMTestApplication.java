@@ -7,14 +7,10 @@ import alberto.masmovilchallenge.injection.module.ApplicationTestModule;
 
 public class MMTestApplication extends MMApplication {
     @Override
-    public void createAppComponent() {
-        applicationComponent = DaggerApplicationTestComponent.builder()
-                .applicationModule(new ApplicationTestModule(this))
+    public ApplicationComponent createAppComponent() {
+        return DaggerApplicationTestComponent.builder()
+                .applicationTestModule(new ApplicationTestModule(this))
                 .build();
-    }
-
-    public ApplicationComponent getApplicationComponent() {
-        return applicationComponent;
     }
 }
 

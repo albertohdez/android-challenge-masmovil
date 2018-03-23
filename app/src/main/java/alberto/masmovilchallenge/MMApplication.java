@@ -7,16 +7,16 @@ import alberto.masmovilchallenge.injection.component.DaggerApplicationComponent;
 import alberto.masmovilchallenge.injection.module.ApplicationModule;
 
 public class MMApplication extends Application {
-    protected ApplicationComponent applicationComponent;
+    private ApplicationComponent applicationComponent = createAppComponent();
 
     @Override
     public void onCreate() {
         super.onCreate();
-        this.createAppComponent();
+        getApplicationComponent().inject(this);
     }
 
-    public void createAppComponent() {
-        applicationComponent = DaggerApplicationComponent.builder()
+    protected ApplicationComponent createAppComponent() {
+        return DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();
     }
