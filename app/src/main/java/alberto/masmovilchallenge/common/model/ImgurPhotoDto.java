@@ -13,10 +13,8 @@ public class ImgurPhotoDto extends ImgurBaseDto {
     @SerializedName("height")
     private int height;
 
-
     @SerializedName("size")
     private long size;
-
 
     public String getType() {
         return type;

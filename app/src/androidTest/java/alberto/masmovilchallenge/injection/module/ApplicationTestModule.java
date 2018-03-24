@@ -6,12 +6,12 @@ import javax.inject.Singleton;
 
 import alberto.masmovilchallenge.MMApplication;
 import alberto.masmovilchallenge.data.prefs.DataStore;
-import alberto.masmovilchallenge.data.prefs.DataStoreManager;
 import alberto.masmovilchallenge.data.service.ApiClient;
 import alberto.masmovilchallenge.data.service.AppService;
-import alberto.masmovilchallenge.data.service.AppServiceImpl;
 import dagger.Module;
 import dagger.Provides;
+
+import static org.mockito.Mockito.mock;
 
 @Module
 public class ApplicationTestModule {
@@ -32,11 +32,10 @@ public class ApplicationTestModule {
         return app;
     }
 
-
     @Provides
     @Singleton
     DataStore provideDataStore(Context context) {
-        return DataStoreManager.getAppDataStore(context);
+        return mock(DataStore.class);
     }
 
     @Provides
@@ -48,6 +47,6 @@ public class ApplicationTestModule {
     @Provides
     @Singleton
     AppService provideAppService(ApiClient apiClient) {
-        return new AppServiceImpl(apiClient);
+        return mock(AppService.class);
     }
 }
