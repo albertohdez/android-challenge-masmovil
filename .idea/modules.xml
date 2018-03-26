@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/masmovil.iml" filepath="$PROJECT_DIR$/masmovil.iml" />
+      <module fileurl="file://E:\Programacion\Repositorios\masmovil-challenge\masmovil.iml" filepath="E:\Programacion\Repositorios\masmovil-challenge\masmovil.iml" />
+      <module fileurl="file://$PROJECT_DIR$/masmovil-challenge.iml" filepath="$PROJECT_DIR$/masmovil-challenge.iml" />
+    </modules>
+  </component>
+</project>
