@@ -1,7 +1,11 @@
 package alberto.masmovilchallenge.ui.gallery;
 
+import android.Manifest;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -18,6 +22,8 @@ import alberto.masmovilchallenge.common.view.dialog.DialogManager;
 import alberto.masmovilchallenge.ui.gallery.adapter.ImageGalleryAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static alberto.masmovilchallenge.common.constants.Constants.PERMISSIONS_REQUEST_CAMERA;
 
 public class GalleryActivity extends BaseActivity implements GalleryMvpView, ImageGalleryAdapter.OnRemoveClickListener {
 
@@ -55,7 +61,8 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView, Ima
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_camera:
-                navigator.openCameraActivity();
+                openCamera();
+
                 break;
             case R.id.action_delete:
                 adapter.updateRemoveFlow();
@@ -71,6 +78,17 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView, Ima
     protected void onResume() {
         super.onResume();
         galleryPresenter.getGallery();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_CAMERA: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    navigator.openCameraActivity();
+                }
+            }
+        }
     }
 
     @Override
@@ -114,5 +132,14 @@ public class GalleryActivity extends BaseActivity implements GalleryMvpView, Ima
         adapter = new ImageGalleryAdapter(albumResponse);
         adapter.setOnRemoveClickListener(this);
         rvImages.setAdapter(adapter);
+    }
+
+    private void openCamera() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                    PERMISSIONS_REQUEST_CAMERA);
+        } else {
+            navigator.openCameraActivity();
+        }
     }
 }

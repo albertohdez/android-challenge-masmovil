@@ -9,5 +9,5 @@
     <string name="ok">OK</string>
     <string name="confirm_delete">¿Está seguro que deseas eliminar la imagen seleccionada?</string>
     <string name="cancel">Cancelar</string>
-    <string name="dialog_title_alert">!Alerta¡</string>
+    <string name="dialog_title_alert">¡Atención!</string>
 </resources>
